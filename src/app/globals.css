@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #f8f6f2;
+  --foreground: #222222;
+  --card: #ffffff;
+  --card-foreground: #222222;
+  --popover: #ffffff;
+  --popover-foreground: #222222;
+  --primary: #f5a623;
+  --primary-foreground: #18120d;
+  --secondary: #18120d;
+  --secondary-foreground: #f8f6f2;
+  --muted: #efeae1;
+  --muted-foreground: #6f665a;
+  --accent: #fbeed3;
+  --accent-foreground: #7a5410;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e9e3d7;
+  --input: #e5ded1;
+  --ring: #f5a623;
+  --radius: 1.25rem;
+}
+
+.dark {
+  --background: #141008;
+  --foreground: #f5f1e8;
+  --card: #1e1810;
+  --card-foreground: #f5f1e8;
+  --popover: #1e1810;
+  --popover-foreground: #f5f1e8;
+  --primary: #f5a623;
+  --primary-foreground: #18120d;
+  --secondary: #f5f1e8;
+  --secondary-foreground: #18120d;
+  --muted: #2a2216;
+  --muted-foreground: #b0a390;
+  --accent: #322815;
+  --accent-foreground: #f0c273;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #302818;
+  --input: #3a3120;
+  --ring: #f5a623;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 1rem);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored sections clear of the fixed navbar. */
+  scroll-padding-top: 6.5rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+.font-display {
+  font-family: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+/* Material-style button ripple (see components/ui/button.tsx). */
+.btn-ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  transform: scale(0);
+  animation: ripple 0.7s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Soft dotted texture behind the hero. */
+.dot-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--foreground) 14%, transparent) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 40%, black 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn-ripple {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
