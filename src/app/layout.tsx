@@ -97,8 +97,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jakarta.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
           disableTransitionOnChange
         >
           {children}
