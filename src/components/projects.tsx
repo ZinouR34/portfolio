@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Check, Coffee, ExternalLink, QrCode } from "lucide-react";
+import { ArrowRight, Check, Coffee, ExternalLink, QrCode } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -94,7 +95,12 @@ export function Projects() {
                 ★ Featured Project
               </Badge>
               <h3 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-                {featured.title}
+                <Link
+                  href="/projects/coffee-shop"
+                  className="transition-colors hover:text-primary"
+                >
+                  {featured.title}
+                </Link>
               </h3>
               <p className="leading-relaxed text-muted-foreground">{featured.description}</p>
               <div className="flex flex-wrap gap-2">
@@ -112,16 +118,24 @@ export function Projects() {
                 ))}
               </div>
               <div className="mt-2 flex flex-wrap gap-3">
-                <Button asChild size="sm" variant="secondary">
+                <Button asChild size="sm">
+                  <Link href="/projects/coffee-shop">
+                    Full Presentation
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+                {featured.demoUrl && (
+                  <Button asChild size="sm" variant="secondary">
+                    <a href={featured.demoUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="size-4" />
+                      Live Demo
+                    </a>
+                  </Button>
+                )}
+                <Button asChild size="sm" variant="outline">
                   <a href={site.socials.github} target="_blank" rel="noopener noreferrer">
                     <GithubIcon className="size-4" />
                     View Code
-                  </a>
-                </Button>
-                <Button asChild size="sm" variant="outline">
-                  <a href={site.socials.github} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="size-4" />
-                    Live Demo
                   </a>
                 </Button>
               </div>

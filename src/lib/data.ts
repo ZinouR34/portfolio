@@ -243,6 +243,8 @@ export type Project = {
   stack: string[];
   icon: Icon;
   featured?: boolean;
+  /** Public live demo URL, if deployed. */
+  demoUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -262,6 +264,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "React", "Supabase", "PostgreSQL", "TailwindCSS", "Vercel"],
     icon: QrCode,
     featured: true,
+    demoUrl: "https://coffee-flow-zineddine.vercel.app/shop/anis/table/1/menu",
   },
   {
     title: "Mobile Network Simulator",
