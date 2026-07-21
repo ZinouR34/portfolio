@@ -89,6 +89,39 @@ const adminScreens = [
   },
 ];
 
+const moreScreens = [
+  {
+    title: "Tables & QR codes",
+    caption: "A unique QR per table — print it, preview its menu or remove it in one click.",
+    src: "/projects/coffee/tables-qr.png",
+  },
+  {
+    title: "Work stations",
+    caption: "Kitchen, pizza, cold drinks, register — every category routes orders to the right station.",
+    src: "/projects/coffee/stations.png",
+  },
+  {
+    title: "Menu categories",
+    caption: "Structure the menu and bind each category to a station, with product counts at a glance.",
+    src: "/projects/coffee/categories.png",
+  },
+  {
+    title: "Category editor",
+    caption: "Create or hide a category without deleting its products — the customer menu updates instantly.",
+    src: "/projects/coffee/category-modal.png",
+  },
+  {
+    title: "Team & roles",
+    caption: "Add staff by phone number, assign their stations and switch roles in seconds.",
+    src: "/projects/coffee/team.png",
+  },
+  {
+    title: "Shop settings",
+    caption: "Name, welcome message, address, opening hours and social links — all editable live.",
+    src: "/projects/coffee/settings.png",
+  },
+];
+
 const features = [
   { icon: QrCode, title: "QR Ordering", text: "One QR per table opens the right menu with the table pre-selected." },
   { icon: Radio, title: "Realtime Orders", text: "Supabase Realtime pushes every order and status change instantly." },
@@ -107,6 +140,49 @@ const fadeUp = {
   viewport: { once: true, margin: "-60px" },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
 };
+
+type StaffScreen = { title: string; caption: string; src: string };
+
+/** Large alternating screenshot row with continuous 01…09 numbering. */
+function StaffScreenRow({ screen, index }: { screen: StaffScreen; index: number }) {
+  const flipped = index % 2 === 1;
+  return (
+    <motion.div
+      {...fadeUp}
+      className={`grid items-center gap-8 ${
+        flipped
+          ? "lg:grid-cols-[1.6fr_1fr] lg:[&>*:first-child]:order-2"
+          : "lg:grid-cols-[1fr_1.6fr]"
+      }`}
+    >
+      <div className={flipped ? "lg:text-right" : ""}>
+        <p className="font-display text-sm font-extrabold text-primary">
+          {String(index + 1).padStart(2, "0")} · Staff side
+        </p>
+        <h3 className="font-display mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
+          {screen.title}
+        </h3>
+        <p className="mt-3 leading-relaxed text-muted-foreground">{screen.caption}</p>
+      </div>
+      <div className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-[0_30px_60px_-30px_rgba(24,18,13,0.35)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_36px_70px_-30px_rgba(245,166,35,0.45)]">
+        <div className="flex items-center gap-1.5 border-b border-border bg-muted/60 px-4 py-2.5">
+          <span className="size-2.5 rounded-full bg-[#FF5F57]" aria-hidden />
+          <span className="size-2.5 rounded-full bg-[#FEBC2E]" aria-hidden />
+          <span className="size-2.5 rounded-full bg-[#28C840]" aria-hidden />
+        </div>
+        <div className="relative aspect-[2/1]">
+          <Image
+            src={screen.src}
+            alt={screen.title}
+            fill
+            sizes="(max-width: 1024px) 92vw, 660px"
+            className="object-cover object-top"
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export function CoffeeShopCaseStudy() {
   return (
@@ -151,7 +227,7 @@ export function CoffeeShopCaseStudy() {
               transition={{ ...fadeUp.transition, delay: 0.08 }}
               className="font-display mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl"
             >
-              AI Coffee Shop
+              Coffee and Fast Food Shop
               <span className="text-primary"> Ordering System</span>
             </motion.h1>
             <motion.p
@@ -257,39 +333,29 @@ export function CoffeeShopCaseStudy() {
 
           <div className="flex flex-col gap-16">
             {adminScreens.map((screen, i) => (
-              <motion.div
-                key={screen.title}
-                {...fadeUp}
-                className={`grid items-center gap-8 lg:grid-cols-[1fr_1.6fr] ${
-                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <div className={i % 2 === 1 ? "lg:text-right" : ""}>
-                  <p className="font-display text-sm font-extrabold text-primary">
-                    0{i + 1} · Staff side
-                  </p>
-                  <h3 className="font-display mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
-                    {screen.title}
-                  </h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">{screen.caption}</p>
-                </div>
-                <div className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-[0_30px_60px_-30px_rgba(24,18,13,0.35)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_36px_70px_-30px_rgba(245,166,35,0.45)]">
-                  <div className="flex items-center gap-1.5 border-b border-border bg-muted/60 px-4 py-2.5">
-                    <span className="size-2.5 rounded-full bg-[#FF5F57]" aria-hidden />
-                    <span className="size-2.5 rounded-full bg-[#FEBC2E]" aria-hidden />
-                    <span className="size-2.5 rounded-full bg-[#28C840]" aria-hidden />
-                  </div>
-                  <div className="relative aspect-[2/1]">
-                    <Image
-                      src={screen.src}
-                      alt={screen.title}
-                      fill
-                      sizes="(max-width: 1024px) 92vw, 660px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                </div>
-              </motion.div>
+              <StaffScreenRow key={screen.title} screen={screen} index={i} />
+            ))}
+          </div>
+        </section>
+
+        {/* Dashboard gallery */}
+        <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
+          <motion.div {...fadeUp} className="mb-12 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground shadow-sm">
+              <span className="size-1.5 rounded-full bg-primary" aria-hidden />
+              Every Detail Handled
+            </span>
+            <h2 className="font-display mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Tables, stations, team & settings
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+              The manager configures the whole shop — from printed QR codes to who works at
+              which station.
+            </p>
+          </motion.div>
+          <div className="flex flex-col gap-16">
+            {moreScreens.map((screen, i) => (
+              <StaffScreenRow key={screen.title} screen={screen} index={i + adminScreens.length} />
             ))}
           </div>
         </section>

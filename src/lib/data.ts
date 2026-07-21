@@ -249,7 +249,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "AI Coffee Shop Ordering System",
+    title: "Coffee and Fast Food Shop Ordering System",
     description:
       "An AI-powered ordering platform allowing customers to order through QR codes while managers, cashiers and kitchen stations receive real-time orders.",
     features: [
